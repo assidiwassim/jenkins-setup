@@ -3,7 +3,6 @@ name: 'devops-stack'
 services:
   jenkins:
     image: jenkins/jenkins:lts
-    privileged: true
     user: root
     container_name: jenkins
     ports:
