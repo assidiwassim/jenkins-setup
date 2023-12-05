@@ -13,9 +13,10 @@ RUN apt-get update && \
 ARG host_user_uid=1000
 
 # Set the Jenkins user UID
-RUN usermod -u ${host_user_uid} jenkins && \
-    groupadd -g $(stat -c "%g" /var/run/docker.sock) docker && \
-    usermod -aG docker jenkins
+RUN usermod -u ${host_user_uid} jenkins
 
 # Switch back to the Jenkins user
 USER jenkins
+
+# Add the jenkins user to the docker group at runtime
+RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
