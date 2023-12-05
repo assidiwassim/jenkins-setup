@@ -9,8 +9,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Set permissions for Docker socket
-RUN groupadd -g 999 docker && \
-    usermod -aG docker jenkins
+RUN usermod -aG docker jenkins
 
 # Switch back to the Jenkins user
 USER jenkins
