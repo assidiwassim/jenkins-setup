@@ -3,10 +3,9 @@ FROM jenkins/jenkins:lts
 # Switch to root to install necessary packages
 USER root
 
-# Install packages if needed
-# RUN apt-get update && \
-#     apt-get install -y <package-name> && \
-#     rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get install -y docker.io \
+    && rm -rf /var/lib/apt/lists/*
 
 # Get the host user UID
 ARG host_user_uid=1000
