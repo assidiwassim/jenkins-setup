@@ -2,25 +2,14 @@ version: '3'
 
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    image: jenkins/jenkins:latest
     container_name: jenkins
+    privileged: true
     ports:
       - "4008:8080"
-      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-    restart: always
-    environment:
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - DOCKER_TLS_CERTDIR=
-    user: root
-    networks:
-      - jenkinsnet
-
-networks:
-  jenkinsnet:
-    driver: bridge
 
 volumes:
   jenkins_home:
