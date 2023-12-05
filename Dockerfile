@@ -7,6 +7,10 @@ RUN apt-get update \
     && apt-get install -y docker.io \
     && rm -rf /var/lib/apt/lists/*
 
+# Set permissions for Docker socket
+RUN groupadd -g 999 docker && \
+    usermod -aG docker jenkins
+
 # Get the host user UID
 ARG host_user_uid=1000
 
