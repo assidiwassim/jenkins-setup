@@ -9,7 +9,7 @@ USER root
 #     rm -rf /var/lib/apt/lists/*
 
 # Get the host user UID
-ARG host_user_uid=0
+ARG host_user_uid=1000
 
 # Set the Jenkins user UID
 RUN usermod -u ${host_user_uid} jenkins
