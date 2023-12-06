@@ -10,10 +10,14 @@ services:
       - jenkins_home:/var/jenkins_home
     networks:
       - jenkins-net
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
+    privileged: true
 
   dind:
     image: docker:20.10-dind
     container_name: dind
+    privileged: true
     networks:
       - jenkins-net
     volumes:
