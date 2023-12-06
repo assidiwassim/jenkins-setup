@@ -1,14 +1,31 @@
 version: '3'
-
 services:
   jenkins:
-    image: jenkins/jenkins
+    image: jenkins/jenkins:lts
     container_name: jenkins
     ports:
       - "4008:8080"
+      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - jenkins-net
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
+    privileged: true
+
+  dind:
+    image: docker:20.10-dind
+    container_name: dind
+    privileged: true
+    networks:
+      - jenkins-net
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    command: ["--storage-driver=overlay2"]
+
+networks:
+  jenkins-net:
 
 volumes:
   jenkins_home:
