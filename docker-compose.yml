@@ -7,7 +7,7 @@ services:
       - "4008:8080"
       - "50000:50000"
     volumes:
-      - jenkins_home:/var/jenkins_home
+      - jenkins_volume:/var/jenkins_home
     networks:
       - jenkins-net
     environment:
@@ -19,11 +19,11 @@ services:
     networks:
       - jenkins-net
     volumes:
-      - jenkins_home:/var/jenkins_home
+      - jenkins_volume:/var/jenkins_home
     command: ["--storage-driver=overlay2"]
 
 networks:
   jenkins-net:
 
 volumes:
-  jenkins_home:
+  jenkins_volume:
