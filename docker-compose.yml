@@ -10,8 +10,6 @@ services:
       - jenkins_volume:/var/jenkins_home
     networks:
       - jenkins-net
-    environment:
-      - JENKINS_OPTS=--prefix=/jenkins
 
   dind:
     image: docker:20.10-dind
